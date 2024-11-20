@@ -1,0 +1,223 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+  background-color: #f9f9f9;
+  margin: 0;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.App-header {
+  background-color: #006699;
+  color: #f9f9f9;
+  text-align: center;
+  padding: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  flex-wrap: wrap;
+}
+
+.header-logo {
+  height: 80px;
+  width: auto;
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.App-nav {
+  display: flex;
+  justify-content: center;
+  flex: 1;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.App-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 15px;
+}
+
+.App-nav li {
+  margin: 0;
+}
+
+.App-nav a {
+  color: #f9f9f9;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.App-nav a:hover {
+  text-decoration: underline;
+}
+
+.App-body {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: #D9D9D9;
+  box-sizing: border-box;
+}
+
+.App-content {
+  width: 100%;
+  max-width: 950px;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+.App-footer {
+  background-color: #006699;
+  color: #f9f9f9;
+  text-align: center;
+  padding: 25px;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .App-header {
+    padding: 15px;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .header-logo {
+    position: relative;
+    top: initial;
+    transform: none;
+    margin-bottom: 20px;
+  }
+
+  .App-nav {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .App-nav ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .App-nav li {
+    margin: 0;
+  }
+
+  .App-body {
+    padding: 10px;
+  }
+
+  .App-content {
+    max-width: 100%;
+  }
+}
+
+.registration-toggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  margin-top: 50px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.registration-toggle label {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333333;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.registration-toggle input[type="radio"] {
+  margin-right: 10px;
+  accent-color: #006699;
+  cursor: pointer;
+  transform: scale(1.5);
+  transition: transform 0.3s ease;
+}
+
+.registration-toggle input[type="radio"]:hover {
+  transform: scale(1.4);
+}
+
+.edit-account-item input {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s ease;
+}
+
+.edit-account-item input:focus {
+  border-color: #006699;
+  outline: none;
+}
+
+.error-message {
+  color: #ff5722;
+  font-size: 0.875rem;
+}
+
+.edit-account-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.edit-account-actions button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.edit-account-actions button:first-of-type {
+  background-color: #39833d;
+  color: white;
+}
+
+.edit-account-actions button:first-of-type:hover {
+  background-color: #2d6630;
+}
+
+.edit-account-actions button:last-of-type {
+  background-color: #a52624;
+  color: white;
+}
+
+.edit-account-actions button:last-of-type:hover {
+  background-color: #851f1e;
+}

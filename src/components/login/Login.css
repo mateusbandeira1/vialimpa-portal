@@ -1,0 +1,108 @@
+.login-container {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 50px;
+  max-width: 400px;
+  margin: 200px auto;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.login-header {
+  background-color: #006699;
+  padding: 20px;
+  border-radius: 8px 8px 0 0;
+}
+
+.login-header h1 {
+  color: #ffffff;
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.login-content {
+  padding: 50px;
+}
+
+.login-item {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 25px;
+}
+
+.login-item label {
+  color: #000000;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.login-item input {
+  color: #333333;
+  font-size: 1rem;
+  padding: 8px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.login-error {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+button {
+  padding: 10px 40px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 0 5px;
+}
+
+button[type="submit"] {
+  background-color: #006699;
+  color: #ffffff;
+}
+
+button[type="submit"]:hover {
+  background-color: #004d66;
+}
+
+.register-link {
+  margin-top: 20px;
+}
+
+.register-span {
+  color: #006699;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.register-span:hover {
+  color: #004d66;
+}
+
+.register-link p {
+  font-size: 0.9rem;
+  color: #333333;
+}
+
+.register-link span {
+  color: #006699;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.register-link span:hover {
+  color: #004d66;
+}

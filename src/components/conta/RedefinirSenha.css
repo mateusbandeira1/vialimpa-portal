@@ -1,0 +1,125 @@
+.edit-account-container {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 20px;
+  max-width: 1000px;
+  width: 100%;
+  margin: 40px auto;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.edit-account-header {
+  background-color: #006699;
+  padding: 20px;
+  border-radius: 8px 8px 0 0;
+  text-align: center;
+}
+
+.edit-account-header h1 {
+  color: #ffffff;
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.edit-account-content {
+  padding: 20px;
+}
+
+.edit-account-item {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.label-details {
+  color: #000000;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.edit-account-item input {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s ease;
+}
+
+.edit-account-item input:focus {
+  border-color: #006699;
+  outline: none;
+}
+
+.error-message {
+  color: #ff5722;
+  font-size: 0.875rem;
+}
+
+.success-message {
+  color: #39833d;
+  font-size: 0.875rem;
+}
+
+.edit-account-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.edit-account-actions button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.edit-account-actions button:first-of-type {
+  background-color: #39833d;
+  color: white;
+}
+
+.edit-account-actions button:first-of-type:hover {
+  background-color: #2d6630;
+}
+
+.edit-account-actions button:last-of-type {
+  background-color: #006699;
+  color: white;
+}
+
+.edit-account-actions button:last-of-type:hover {
+  background-color: #006699;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+}
+
+.success-message {
+  color: #39833d;
+  font-size: 0.875rem;
+}
+
+.error-message {
+  color: #ff5722;
+  font-size: 0.875rem;
+}
