@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './criaConta.css';
+import './CriaConta.css';
 
 const CriaContaPrefeitura = ({ onRegister, onCancel }) => {
   const [cnpj, setCnpj] = useState('');
