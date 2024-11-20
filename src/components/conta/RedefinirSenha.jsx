@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "./RedefinirSenha.css";
 
 const ModalAtualizarSenha = ({ token, onConfirm, onCancel }) => {
     const [novaSenha, setNovaSenha] = useState("");
