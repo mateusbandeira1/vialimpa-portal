@@ -6,7 +6,7 @@
   "homepage": "https://mateusbandeira1.github.io/vialimpa-portal",
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d disc",
+    "deploy": "gh-pages -d dist",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
