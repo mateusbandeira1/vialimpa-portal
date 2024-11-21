@@ -32,10 +32,19 @@ const ListReport = ({ onReportClick }) => {
       const id_conta = localStorage.getItem('id_conta');
       let endpoint = '';
 
+      const params = new URLSearchParams();
+
+      // Adiciona os filtros na URL
+      if (filters.status) params.append('status', filters.status);
+      if (filters.tipo_obstrucao) params.append('tipo_obstrucao', filters.tipo_obstrucao);
+      if (filters.cidade) params.append('cidade', filters.cidade);
+      params.append('page', 1); // ou outra lógica para paginação
+      params.append('limit', 10); // limite de itens
+
       if (tipo_conta === 'usuario') {
-        endpoint = `http://localhost:4000/relato/usuario?${filters.status ? `status=${filters.status}&` : ''}tipo_obstrucao=${filters.tipo_obstrucao}&cidade=${filters.cidade}&page=1&limit=10`;
+        endpoint = `http://localhost:4000/relato/usuario?${params.toString()}`;
       } else if (tipo_conta === 'prefeitura') {
-        endpoint = `http://localhost:4000/relato/prefeitura/${id_conta}?${filters.status ? `status=${filters.status}&` : ''}tipo_obstrucao=${filters.tipo_obstrucao}&page=1&limit=10`;
+        endpoint = `http://localhost:4000/relato/prefeitura/${id_conta}?${params.toString()}`;
       }
 
       if (endpoint) {
@@ -59,7 +68,7 @@ const ListReport = ({ onReportClick }) => {
 
   useEffect(() => {
     fetchReports();
-  }, []);
+  }, [filters]); // Executa fetch quando os filtros mudam
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
@@ -88,7 +97,6 @@ const ListReport = ({ onReportClick }) => {
         <h1>Lista de Relatos</h1>
       </div>
 
-      { }
       <div className="filters">
         <label>
           Cidade:
