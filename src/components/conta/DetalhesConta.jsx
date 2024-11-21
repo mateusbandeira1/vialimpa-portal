@@ -61,7 +61,7 @@ const DetalhesConta = ({ onBackClick, onEditClick }) => {
       });
 
       alert(response.data.message || "Conta excluída com sucesso!");
-      setConfirmDelete(false);
+      setConfirmDelete(true);
       onBackClick();
     } catch (error) {
       alert(error.response?.data?.message || "Erro ao excluir conta.");
