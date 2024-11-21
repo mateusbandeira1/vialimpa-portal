@@ -70,7 +70,7 @@ const ReportForm = () => {
       <div className="report-form-content">
         <form onSubmit={handleSubmit}>
           <div className="report-form-item">
-            <label className="label" htmlFor="location">Localização (Rua):</label>
+            <label className="label" htmlFor="location">Rua:</label>
             <input
               className="value"
               type="text"
