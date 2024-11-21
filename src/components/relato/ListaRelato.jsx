@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './ListaRelato.css';
 
 const ListReport = ({ onReportClick }) => {
   const [reports, setReports] = useState([]);
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [filters, setFilters] = useState({
     cidade: '',
     status: '',
@@ -64,6 +64,10 @@ const ListReport = ({ onReportClick }) => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchReports();
+  }, [filters]);
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
@@ -124,15 +128,6 @@ const ListReport = ({ onReportClick }) => {
             onChange={handleFilterChange}
           />
         </label>
-      </div>
-
-      <div className="list-report-form-actions">
-        <button type="button" onClick={handleFilter}>
-          Filtrar
-        </button>
-        <button type="button" onClick={handleClearFilters}>
-          Limpar Filtros
-        </button>
       </div>
 
       <div className="report-list-content">
