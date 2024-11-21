@@ -170,12 +170,18 @@ const EditaRelato = ({ report, onConfirmEdit, onCancel }) => {
           <>
             <div className="report-edit-item">
               <label className="label-edit">Status:</label>
-              <input
-                type="text"
+              <select
                 name="status"
                 value={formData.status}
                 onChange={handleChange}
-              />
+                className="value-edit"
+                required
+              >
+                <option value="">Selecione o status</option>
+                <option value="Aberto">Aberto</option>
+                <option value="Em andamento">Em andamento</option>
+                <option value="Concluido">Concluído</option>
+              </select>
             </div>
             <div className="report-edit-item">
               <label className="label-edit">Justificativa:</label>
