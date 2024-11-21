@@ -11,7 +11,7 @@ const ModalAtualizarSenha = ({ token, onConfirm, onCancel }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post("http://localhost:4000/atualizar-senha", {
+            const response = await axios.post("https://vialimpa-api.vercel.app/atualizar-senha", {
                 token: inputToken,
                 novaSenha,
             });
@@ -68,7 +68,7 @@ const RedefinirSenha = () => {
     const handleSubmitEmail = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post("http://localhost:4000/redefinir-senha", {
+            const response = await axios.post("https://vialimpa-api.vercel.app/redefinir-senha", {
                 email,
             });
             setSuccess(response.data.message);

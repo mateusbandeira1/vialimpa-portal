@@ -48,8 +48,8 @@ const EditaRelato = ({ report, onConfirmEdit, onCancel }) => {
 
     try {
       const endpoint = accountType === 'usuario'
-        ? `http://localhost:4000/relato/usuario/${accountId}/${formData.id_relato}`
-        : `http://localhost:4000/relato/prefeitura/${accountId}/${formData.id_relato}`;
+        ? `https://vialimpa-api.vercel.app/relato/usuario/${accountId}/${formData.id_relato}`
+        : `https://vialimpa-api.vercel.app/relato/prefeitura/${accountId}/${formData.id_relato}`;
 
       const dataToSend = {};
       if (accountType === 'usuario') {

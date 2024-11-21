@@ -12,7 +12,7 @@ const Login = ({ onLogin, onRegister, onForgotPassword }) => {
     setError('');
 
     try {
-      const response = await axios.post('http://localhost:4000/login', {
+      const response = await axios.post('https://vialimpa-api.vercel.app/login', {
         cpf_cnpj: username,
         senha: password,
       });

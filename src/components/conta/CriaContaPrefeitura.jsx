@@ -36,7 +36,7 @@ const CriaContaPrefeitura = ({ onRegister, onCancel }) => {
     };
 
     try {
-      const response = await axios.post('http://localhost:4000/prefeitura', newCityHall);
+      const response = await axios.post('https://vialimpa-api.vercel.app/prefeitura', newCityHall);
 
       if (response.data) {
         onRegister(response.data);

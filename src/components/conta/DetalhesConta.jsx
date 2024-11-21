@@ -32,8 +32,8 @@ const DetalhesConta = ({ onBackClick, onEditClick }) => {
     if (tipo_conta && id_conta) {
       const url =
         tipo_conta === "prefeitura"
-          ? `http://localhost:4000/prefeitura/${id_conta}`
-          : `http://localhost:4000/usuario/${id_conta}`;
+          ? `https://vialimpa-api.vercel.app/prefeitura/${id_conta}`
+          : `https://vialimpa-api.vercel.app/usuario/${id_conta}`;
 
       axios
         .get(url)
@@ -49,8 +49,8 @@ const DetalhesConta = ({ onBackClick, onEditClick }) => {
     const id_conta = localStorage.getItem("id_conta");
     const endpoint =
       tipo_conta === "prefeitura"
-        ? "http://localhost:4000/prefeitura"
-        : "http://localhost:4000/usuario";
+        ? "https://vialimpa-api.vercel.app/prefeitura"
+        : "https://vialimpa-api.vercel.app/usuario";
 
     try {
       const response = await axios.delete(endpoint, {

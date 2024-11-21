@@ -34,7 +34,7 @@ const DetalhesRelato = ({ id_relato, onBackClick, onEditClick }) => {
   useEffect(() => {
     const fetchReportDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/relato/${id_relato}`);
+        const response = await axios.get(`https://vialimpa-api.vercel.app/relato/${id_relato}`);
         setReport(response.data);
       } catch (err) {
         setError(
@@ -53,7 +53,7 @@ const DetalhesRelato = ({ id_relato, onBackClick, onEditClick }) => {
     setSuccess("");
 
     try {
-      const response = await axios.delete(`http://localhost:4000/relato/${id_relato}`);
+      const response = await axios.delete(`https://vialimpa-api.vercel.app/relato/${id_relato}`);
       setSuccess(response.data.message || "Relato excluído com sucesso!");
       setTimeout(() => {
         setConfirmDelete(false);

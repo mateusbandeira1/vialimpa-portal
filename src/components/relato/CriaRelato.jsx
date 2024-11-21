@@ -27,7 +27,7 @@ const ReportForm = () => {
     };
 
     try {
-      const response = await axios.post('http://localhost:4000/relato', reportData);
+      const response = await axios.post('https://vialimpa-api.vercel.app/relato', reportData);
 
       if (response.status === 200) {
         setMessage('Relatório enviado com sucesso!');

@@ -63,8 +63,8 @@ const EditaConta = ({ user, onConfirmEdit, onCancel }) => {
 
     try {
       const apiUrl = tipo_conta === "usuario"
-        ? `http://localhost:4000/usuario/${id_conta}`
-        : `http://localhost:4000/prefeitura/${id_conta}`;
+        ? `https://vialimpa-api.vercel.app/usuario/${id_conta}`
+        : `https://vialimpa-api.vercel.app/prefeitura/${id_conta}`;
 
       const response = await axios.put(apiUrl, apiData);
 

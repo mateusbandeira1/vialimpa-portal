@@ -41,9 +41,9 @@ const ListReport = ({ onReportClick }) => {
       params.append('limit', 10);
 
       if (tipo_conta === 'usuario') {
-        endpoint = `http://localhost:4000/relato/usuario?${params.toString()}`;
+        endpoint = `https://vialimpa-api.vercel.app/relato/usuario?${params.toString()}`;
       } else if (tipo_conta === 'prefeitura') {
-        endpoint = `http://localhost:4000/relato/prefeitura/${id_conta}?${params.toString()}`;
+        endpoint = `https://vialimpa-api.vercel.app/relato/prefeitura/${id_conta}?${params.toString()}`;
       }
 
       if (endpoint) {
