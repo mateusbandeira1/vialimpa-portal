@@ -2,6 +2,12 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './CriaRelato.css';
 
+const estadosBrasil = [
+  'AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA',
+  'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN',
+  'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'
+];
+
 const ReportForm = () => {
   const [location, setLocalizacao] = useState('');
   const [obstructionType, setTipoObstrucao] = useState('');
@@ -29,14 +35,18 @@ const ReportForm = () => {
     try {
       const response = await axios.post('https://vialimpa-api.vercel.app/relato', reportData);
 
-      if (response.status === 200) {
+      if (response.data.message) {
+        setMessage(response.data.message);
+      } else {
         setMessage('Relatório enviado com sucesso!');
-        handleCancel();
+      }
+      handleCancel();
+    } catch (error) {
+      if (error.response?.data?.message) {
+        setMessage(error.response.data.message);
       } else {
         setMessage('Erro ao enviar o relatório. Tente novamente.');
       }
-    } catch (error) {
-      setMessage('Erro ao enviar o relatório. Tente novamente.');
     }
   };
 
@@ -105,30 +115,29 @@ const ReportForm = () => {
           </div>
           <div className="report-form-item">
             <label className="label" htmlFor="estado">Estado:</label>
-            <input
+            <select
               className="value"
-              type="text"
               id="estado"
               value={estado}
               onChange={(e) => setEstado(e.target.value)}
               required
-            />
+            >
+              <option value="">Selecione um estado</option>
+              {estadosBrasil.map((estado) => (
+                <option key={estado} value={estado}>{estado}</option>
+              ))}
+            </select>
           </div>
           <div className="report-form-item">
             <label className="label" htmlFor="obstructionType">Tipo de Obstrução:</label>
-            <select
+            <input
               className="value"
+              type="text"
               id="obstructionType"
               value={obstructionType}
               onChange={(e) => setTipoObstrucao(e.target.value)}
               required
-            >
-              <option value="">Selecione um tipo</option>
-              <option value="buraco">Buraco</option>
-              <option value="mau estado">Mau Estado</option>
-              <option value="obras">Obras</option>
-              <option value="calçada danificada">Calçada Danificada</option>
-            </select>
+            />
           </div>
           <div className="report-form-item">
             <label className="label" htmlFor="description">Descrição:</label>
