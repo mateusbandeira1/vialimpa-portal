@@ -54,7 +54,7 @@ function App() {
   };
 
   const handleBackClick = () => {
-    setView('login');
+    setView('listaRelato');
   };
 
   const handleEditReportClick = (id_relato) => {
