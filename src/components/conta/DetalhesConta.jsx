@@ -57,10 +57,10 @@ const DetalhesConta = ({ onBackClick, onEditClick }) => {
         data: {
           [tipo_conta === "prefeitura" ? "id_prefeitura" : "id_usuario"]: id_conta,
           senha: password,
-        },
+        }
       });
 
-      alert(response.data.message || "Conta excluída com sucesso!");
+      response.data.message;
       window.location.reload();
       setConfirmDelete(false);
       onBackClick();
