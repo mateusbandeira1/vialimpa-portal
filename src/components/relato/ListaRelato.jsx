@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import './ListaRelato.css';
 
 const ListReport = ({ onReportClick }) => {
   const [reports, setReports] = useState([]);
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [filters, setFilters] = useState({
     cidade: '',
     status: '',
@@ -34,12 +34,11 @@ const ListReport = ({ onReportClick }) => {
 
       const params = new URLSearchParams();
 
-      // Adiciona os filtros na URL
       if (filters.status) params.append('status', filters.status);
       if (filters.tipo_obstrucao) params.append('tipo_obstrucao', filters.tipo_obstrucao);
       if (filters.cidade) params.append('cidade', filters.cidade);
-      params.append('page', 1); // ou outra lógica para paginação
-      params.append('limit', 10); // limite de itens
+      params.append('page', 1);
+      params.append('limit', 10);
 
       if (tipo_conta === 'usuario') {
         endpoint = `http://localhost:4000/relato/usuario?${params.toString()}`;
@@ -65,10 +64,6 @@ const ListReport = ({ onReportClick }) => {
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-    fetchReports();
-  }, [filters]); // Executa fetch quando os filtros mudam
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
@@ -132,7 +127,7 @@ const ListReport = ({ onReportClick }) => {
       </div>
 
       <div className="list-report-form-actions">
-        <button type="submit" onClick={handleFilter}>
+        <button type="button" onClick={handleFilter}>
           Filtrar
         </button>
         <button type="button" onClick={handleClearFilters}>
