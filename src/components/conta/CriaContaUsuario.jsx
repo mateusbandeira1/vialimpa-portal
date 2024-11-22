@@ -131,7 +131,7 @@ const CriaContaUsuario = ({ onRegister, onCancel }) => {
             />
           </div>
           <div className="register-form-item">
-            <label className="label" htmlFor="endereco">Endereço:</label>
+            <label className="label" htmlFor="endereco">Rua/Avenida:</label>
             <input
               className="value"
               type="text"

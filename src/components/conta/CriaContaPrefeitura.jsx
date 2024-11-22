@@ -126,7 +126,7 @@ const CriaContaPrefeitura = ({ onRegister, onCancel }) => {
             />
           </div>
           <div className="register-form-item">
-            <label className="label" htmlFor="rua">Rua:</label>
+            <label className="label" htmlFor="rua">Rua/Avenida:</label>
             <input
               className="value"
               type="text"
