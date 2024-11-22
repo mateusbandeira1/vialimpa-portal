@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import _ from 'lodash';
 import './ListaRelato.css';
 
 const ListReport = ({ onReportClick }) => {
@@ -65,8 +66,13 @@ const ListReport = ({ onReportClick }) => {
     }
   };
 
+  const debouncedFetchReports = _.debounce(fetchReports, 2000);
+
   useEffect(() => {
-    fetchReports();
+    debouncedFetchReports();
+    return () => {
+      debouncedFetchReports.cancel();
+    };
   }, [filters]);
 
   const handleFilterChange = (e) => {
@@ -75,19 +81,6 @@ const ListReport = ({ onReportClick }) => {
       ...prevFilters,
       [name]: value,
     }));
-  };
-
-  const handleFilter = () => {
-    fetchReports();
-  };
-
-  const handleClearFilters = () => {
-    setFilters({
-      cidade: '',
-      status: '',
-      tipo_obstrucao: '',
-    });
-    fetchReports();
   };
 
   return (
