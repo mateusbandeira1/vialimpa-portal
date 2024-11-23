@@ -10,7 +10,7 @@ const estadosBrasileiros = [
 const EditaConta = ({ user, onConfirmEdit, onCancel }) => {
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const tipo_conta = localStorage.getItem("tipo_conta");
 
@@ -26,11 +26,12 @@ const EditaConta = ({ user, onConfirmEdit, onCancel }) => {
 
   const handleConfirm = async () => {
     setLoading(true);
-    setError(null);
+    setErrorMessage(""); // Limpa mensagens de erro antes de iniciar a requisição
+
     const id_conta = localStorage.getItem("id_conta");
 
     if (!tipo_conta || !id_conta) {
-      setError("Erro ao obter informações da conta. Tente fazer login novamente.");
+      setErrorMessage("Erro: Não foi possível obter informações da conta. Tente fazer login novamente.");
       setLoading(false);
       return;
     }
@@ -68,12 +69,13 @@ const EditaConta = ({ user, onConfirmEdit, onCancel }) => {
 
       const response = await axios.put(apiUrl, apiData);
 
+      alert(`Sucesso: ${response.data.message || "Dados atualizados com sucesso!"}`);
       onConfirmEdit(response.data);
     } catch (err) {
       if (err.response) {
-        setError(err.response.data.message || "Erro ao atualizar os dados.");
+        setErrorMessage(err.response.data.message || "Erro ao atualizar os dados.");
       } else {
-        setError("Erro ao se comunicar com o servidor.");
+        setErrorMessage("Erro: Não foi possível se comunicar com o servidor.");
       }
     } finally {
       setLoading(false);
@@ -86,6 +88,12 @@ const EditaConta = ({ user, onConfirmEdit, onCancel }) => {
         <h1>Editar Conta</h1>
       </div>
       <div className="edit-account-content">
+        {/* Exibição de mensagens de erro */}
+        {errorMessage && (
+          <div className="error-message">
+            {errorMessage}
+          </div>
+        )}
         {tipo_conta === "usuario" ? (
           <>
             <div className="edit-account-item">
@@ -220,11 +228,10 @@ const EditaConta = ({ user, onConfirmEdit, onCancel }) => {
             ))}
           </select>
         </div>
-
-        {error && <div className="error-message">{error}</div>}
-
         <div className="edit-account-actions">
-          <button onClick={handleConfirm}>Confirmar</button>
+          <button onClick={handleConfirm} disabled={loading}>
+            Confirmar
+          </button>
           <button onClick={onCancel}>Cancelar</button>
         </div>
       </div>

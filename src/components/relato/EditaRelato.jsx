@@ -8,8 +8,6 @@ const estadosBrasileiros = [
 
 const EditaRelato = ({ report, onConfirmEdit, onCancel }) => {
   const [formData, setFormData] = useState({ ...report });
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
   const [accountType, setAccountType] = useState('');
   const [accountId, setAccountId] = useState('');
 
@@ -21,7 +19,7 @@ const EditaRelato = ({ report, onConfirmEdit, onCancel }) => {
       setAccountType(storedAccountType);
       setAccountId(storedAccountId);
     } else {
-      setError('Usuário não autenticado.');
+      alert('Usuário não autenticado.');
     }
   }, []);
 
@@ -30,9 +28,6 @@ const EditaRelato = ({ report, onConfirmEdit, onCancel }) => {
   };
 
   const handleConfirm = async () => {
-    setError('');
-    setSuccess('');
-
     if (accountType === 'usuario' && (
       !formData.descricao ||
       !formData.rua ||
@@ -42,7 +37,7 @@ const EditaRelato = ({ report, onConfirmEdit, onCancel }) => {
       !formData.cidade ||
       !formData.estado
     )) {
-      setError('Todos os campos obrigatórios devem ser preenchidos.');
+      alert('Todos os campos obrigatórios devem ser preenchidos.');
       return;
     }
 
@@ -72,18 +67,18 @@ const EditaRelato = ({ report, onConfirmEdit, onCancel }) => {
       });
 
       if (response.status === 200) {
-        setSuccess('Relato atualizado com sucesso.');
+        alert('Relato atualizado com sucesso.');
         setTimeout(() => {
           onConfirmEdit(formData);
         }, 1500);
       }
     } catch (err) {
       if (err.response) {
-        setError(err.response.data.message || 'Erro ao editar o relato.');
+        alert(err.response.data.message || 'Erro ao editar o relato.');
       } else if (err.request) {
-        setError('Erro na conexão com o servidor.');
+        alert('Erro na conexão com o servidor.');
       } else {
-        setError('Erro desconhecido.');
+        alert('Erro desconhecido.');
       }
     }
   };
@@ -195,8 +190,6 @@ const EditaRelato = ({ report, onConfirmEdit, onCancel }) => {
           </>
         )}
 
-        {error && <p className="error-message">{error}</p>}
-        {success && <p className="success-message">{success}</p>}
         <div className="report-edit-actions">
           <button onClick={handleConfirm}>Confirmar</button>
           <button onClick={onCancel}>Cancelar</button>

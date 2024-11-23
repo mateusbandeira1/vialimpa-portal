@@ -5,7 +5,6 @@ import './ListaRelato.css';
 
 const ListReport = ({ onReportClick }) => {
   const [reports, setReports] = useState([]);
-  const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
   const [filters, setFilters] = useState({
     cidade: '',
@@ -27,7 +26,6 @@ const ListReport = ({ onReportClick }) => {
   const fetchReports = async () => {
     try {
       setLoading(true);
-      setError('');
 
       const tipo_conta = localStorage.getItem('tipo_conta');
       const id_conta = localStorage.getItem('id_conta');
@@ -55,18 +53,18 @@ const ListReport = ({ onReportClick }) => {
       }
     } catch (err) {
       if (err.response) {
-        setError(err.response.data.message || 'Erro ao carregar os relatos.');
+        alert(err.response.data.message || 'Erro ao carregar os relatos.');
       } else if (err.request) {
-        setError('Erro de conexão com o servidor.');
+        alert('Erro de conexão com o servidor.');
       } else {
-        setError('Erro desconhecido.');
+        alert('Erro desconhecido.');
       }
     } finally {
       setLoading(false);
     }
   };
 
-  const debouncedFetchReports = _.debounce(fetchReports, 2000);
+  const debouncedFetchReports = _.debounce(fetchReports, 1000);
 
   useEffect(() => {
     debouncedFetchReports();
@@ -125,44 +123,41 @@ const ListReport = ({ onReportClick }) => {
 
       <div className="report-list-content">
         {loading && <p>Carregando relatos...</p>}
-        {error && <p className="error-message">{error}</p>}
-        {!loading && !error && (
-          <table className="report-table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Status</th>
-                <th>Tipo de Obstrução</th>
-                <th>Cidade</th>
-                <th>Data de Criação</th>
-                <th>Ações</th>
-              </tr>
-            </thead>
-            <tbody>
-              {reports.map((report) => (
-                <tr key={report.id_relato}>
-                  <td>{report.id_relato}</td>
-                  <td
-                    className={`status-${report.status.replace(/\s+/g, '-')}`}
+        <table className="report-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Status</th>
+              <th>Tipo de Obstrução</th>
+              <th>Cidade</th>
+              <th>Data de Criação</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            {reports.map((report) => (
+              <tr key={report.id_relato}>
+                <td>{report.id_relato}</td>
+                <td
+                  className={`status-${report.status.replace(/\s+/g, '-')}`}
+                >
+                  {formataNome(report.status)}
+                </td>
+                <td>{formataNome(report.tipo_obstrucao)}</td>
+                <td>{formataNome(report.cidade)}</td>
+                <td>{formataData(report.data_criacao)}</td>
+                <td>
+                  <button
+                    type="submit"
+                    onClick={() => onReportClick(report.id_relato)}
                   >
-                    {formataNome(report.status)}
-                  </td>
-                  <td>{formataNome(report.tipo_obstrucao)}</td>
-                  <td>{formataNome(report.cidade)}</td>
-                  <td>{formataData(report.data_criacao)}</td>
-                  <td>
-                    <button
-                      type="submit"
-                      onClick={() => onReportClick(report.id_relato)}
-                    >
-                      Detalhar
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
+                    Detalhar
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );

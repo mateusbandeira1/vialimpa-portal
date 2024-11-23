@@ -16,7 +16,6 @@ const ReportForm = () => {
   const [cidade, setCidade] = useState('');
   const [estado, setEstado] = useState('');
   const [pontoReferencia, setPontoReferencia] = useState('');
-  const [message, setMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,16 +35,16 @@ const ReportForm = () => {
       const response = await axios.post('https://vialimpa-api.vercel.app/relato', reportData);
 
       if (response.data.message) {
-        setMessage(response.data.message);
+        alert(response.data.message);  // Exibe a mensagem da API em um alert
       } else {
-        setMessage('Relatório enviado com sucesso!');
+        alert('Relatório enviado com sucesso!');  // Exibe mensagem de sucesso
       }
       handleCancel();
     } catch (error) {
       if (error.response?.data?.message) {
-        setMessage(error.response.data.message);
+        alert(error.response.data.message);  // Exibe a mensagem de erro da API em um alert
       } else {
-        setMessage('Erro ao enviar o relatório. Tente novamente.');
+        alert('Erro ao enviar o relatório. Tente novamente.');  // Exibe erro genérico
       }
     }
   };
@@ -58,14 +57,12 @@ const ReportForm = () => {
     setCidade('');
     setEstado('');
     setPontoReferencia('');
-    setMessage('');
   };
 
   return (
     <div className="report-form-container">
       <div className="report-form-header">
         <h1>Relatar Obstrução</h1>
-        {message && <p>{message}</p>}
       </div>
       <div className="report-form-content">
         <form onSubmit={handleSubmit}>

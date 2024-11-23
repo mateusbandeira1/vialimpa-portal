@@ -26,8 +26,6 @@ const DetalhesRelato = ({ id_relato, onBackClick, onEditClick }) => {
   const [report, setReport] = useState(null);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
 
   const tipoConta = localStorage.getItem("tipo_conta");
 
@@ -37,9 +35,7 @@ const DetalhesRelato = ({ id_relato, onBackClick, onEditClick }) => {
         const response = await axios.get(`https://vialimpa-api.vercel.app/relato/${id_relato}`);
         setReport(response.data);
       } catch (err) {
-        setError(
-          err.response?.data?.message || "Erro ao carregar os detalhes do relato."
-        );
+        alert(err.response?.data?.message || "Erro ao carregar os detalhes do relato.");
       } finally {
         setLoading(false);
       }
@@ -49,18 +45,13 @@ const DetalhesRelato = ({ id_relato, onBackClick, onEditClick }) => {
   }, [id_relato]);
 
   const handleDelete = async () => {
-    setError("");
-    setSuccess("");
-
     try {
       const response = await axios.delete(`https://vialimpa-api.vercel.app/relato/${id_relato}`);
-      setSuccess(response.data.message || "Relato excluído com sucesso!");
-      setTimeout(() => {
-        setConfirmDelete(false);
-        onBackClick();
-      }, 1500);
+      alert(response.data.message || "Relato excluído com sucesso!");
+      setConfirmDelete(false);
+      onBackClick();
     } catch (err) {
-      setError(err.response?.data?.message || "Erro ao excluir o relato.");
+      alert(err.response?.data?.message || "Erro ao excluir o relato.");
     }
   };
 
@@ -70,10 +61,6 @@ const DetalhesRelato = ({ id_relato, onBackClick, onEditClick }) => {
 
   if (loading) {
     return <div>Carregando...</div>;
-  }
-
-  if (error) {
-    return <div className="error-message">{error}</div>;
   }
 
   if (!report) {
@@ -147,7 +134,6 @@ const DetalhesRelato = ({ id_relato, onBackClick, onEditClick }) => {
         </div>
       </div>
       <div className="report-details-actions">
-        { }
         {tipoConta === "usuario" && report.status === "aberto" && (
           <>
             <button type="submit" onClick={handleEditClick}>Editar</button>
@@ -160,8 +146,6 @@ const DetalhesRelato = ({ id_relato, onBackClick, onEditClick }) => {
         <button type="button" onClick={onBackClick}>Voltar</button>
       </div>
       {confirmDelete && (<Modal onConfirm={handleDelete} onCancel={() => setConfirmDelete(false)} />)}
-      {success && <div className="success-message">{success}</div>}
-      {error && <div className="error-message">{error}</div>}
     </div>
   );
 };

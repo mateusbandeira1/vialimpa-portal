@@ -39,7 +39,7 @@ const DetalhesConta = ({ onBackClick, onEditClick }) => {
         .get(url)
         .then((response) => setUserData(response.data))
         .catch((error) => {
-          alert(error.response?.data?.message || "Erro ao buscar dados.");
+          alert(`Erro: ${error.response?.data?.message || "Erro ao buscar dados."}`);
         });
     }
   }, []);
@@ -57,15 +57,15 @@ const DetalhesConta = ({ onBackClick, onEditClick }) => {
         data: {
           [tipo_conta === "prefeitura" ? "id_prefeitura" : "id_usuario"]: id_conta,
           senha: password,
-        }
+        },
       });
 
-      response.data.message;
+      alert(`Sucesso: ${response.data.message || "Conta excluída com sucesso!"}`);
       window.location.reload();
       setConfirmDelete(false);
       onBackClick();
     } catch (error) {
-      error.response?.data?.message;
+      alert(`Erro: ${error.response?.data?.message || "Erro ao tentar excluir a conta."}`);
     }
   };
 
@@ -141,8 +141,12 @@ const DetalhesConta = ({ onBackClick, onEditClick }) => {
           </span>
         </div>
         <div className="account-details-actions">
-          <button type="submit" onClick={onEditClick}>Editar</button>
-          <button type="button" onClick={() => setConfirmDelete(true)}>Excluir</button>
+          <button type="submit" onClick={onEditClick}>
+            Editar
+          </button>
+          <button type="button" onClick={() => setConfirmDelete(true)}>
+            Excluir
+          </button>
         </div>
       </div>
       {confirmDelete && (

@@ -5,11 +5,9 @@ import './Login.css';
 const Login = ({ onLogin, onRegister, onForgotPassword }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
 
     try {
       const response = await axios.post('https://vialimpa-api.vercel.app/login', {
@@ -23,11 +21,11 @@ const Login = ({ onLogin, onRegister, onForgotPassword }) => {
       onLogin();
     } catch (err) {
       if (err.response) {
-        setError(err.response.data.message || 'Erro ao fazer login');
+        alert(err.response.data.message || 'Erro ao fazer login'); // Mensagem de erro retornada pela API
       } else if (err.request) {
-        setError('Erro na conexão com o servidor');
+        alert('Erro na conexão com o servidor'); // Caso de erro de conexão
       } else {
-        setError('Erro desconhecido');
+        alert('Erro desconhecido'); // Erro genérico
       }
     }
   };
@@ -59,7 +57,6 @@ const Login = ({ onLogin, onRegister, onForgotPassword }) => {
               required
             />
           </div>
-          {error && <p className="login-error">{error}</p>}
           <div className="button-container">
             <button type="submit">Entrar</button>
           </div>

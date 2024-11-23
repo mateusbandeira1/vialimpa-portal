@@ -5,8 +5,6 @@ import "./RedefinirSenha.css";
 const ModalAtualizarSenha = ({ token, onConfirm, onCancel }) => {
     const [novaSenha, setNovaSenha] = useState("");
     const [inputToken, setInputToken] = useState(token || "");
-    const [error, setError] = useState("");
-    const [success, setSuccess] = useState("");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -15,10 +13,10 @@ const ModalAtualizarSenha = ({ token, onConfirm, onCancel }) => {
                 token: inputToken,
                 novaSenha,
             });
-            setSuccess(response.data.message);
+            alert(response.data.message); // Exibe a mensagem de sucesso no alert
             onConfirm();
         } catch (err) {
-            setError(err.response?.data?.message || "Erro ao atualizar a senha.");
+            alert(err.response?.data?.message || "Erro ao atualizar a senha."); // Exibe erros no alert
         }
     };
 
@@ -51,8 +49,6 @@ const ModalAtualizarSenha = ({ token, onConfirm, onCancel }) => {
                         </button>
                     </div>
                 </form>
-                {error && <div className="error-message">{error}</div>}
-                {success && <div className="success-message">{success}</div>}
             </div>
         </div>
     );
@@ -62,8 +58,6 @@ const RedefinirSenha = () => {
     const [email, setEmail] = useState("");
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [token, setToken] = useState(null);
-    const [error, setError] = useState("");
-    const [success, setSuccess] = useState("");
 
     const handleSubmitEmail = async (e) => {
         e.preventDefault();
@@ -71,11 +65,11 @@ const RedefinirSenha = () => {
             const response = await axios.post("https://vialimpa-api.vercel.app/redefinir-senha", {
                 email,
             });
-            setSuccess(response.data.message);
+            alert(response.data.message); // Exibe a mensagem de sucesso no alert
             setToken(response.data.token);
             setIsModalOpen(true);
         } catch (err) {
-            setError(err.response?.data?.message || "Erro ao redefinir a senha.");
+            alert(err.response?.data?.message || "Erro ao redefinir a senha."); // Exibe erros no alert
         }
     };
 
@@ -99,8 +93,6 @@ const RedefinirSenha = () => {
                         <button type="submit">Enviar token</button>
                     </div>
                 </form>
-                {error && <div className="error-message">{error}</div>}
-                {success && <div className="success-message">{success}</div>}
             </div>
 
             {isModalOpen && (

@@ -13,7 +13,6 @@ const CriaContaUsuario = ({ onRegister, onCancel }) => {
   const [bairro, setBairro] = useState('');
   const [cidade, setCidade] = useState('');
   const [estado, setEstado] = useState('');
-  const [mensagens, setMensagens] = useState([]);
 
   const estadosBrasileiros = [
     "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA",
@@ -40,17 +39,17 @@ const CriaContaUsuario = ({ onRegister, onCancel }) => {
       const response = await axios.post('https://vialimpa-api.vercel.app/usuario', newUser);
 
       if (response.data) {
+        alert(response.data.message || 'Cadastro realizado com sucesso!');
         onRegister(response.data);
-        setMensagens([{ tipo: 'sucesso', texto: response.data.message || 'Cadastro realizado com sucesso!' }]);
       }
     } catch (error) {
       if (error.response && error.response.data) {
         const erros = Array.isArray(error.response.data.message)
           ? error.response.data.message
           : [error.response.data.message];
-        setMensagens(erros.map((msg) => ({ tipo: 'erro', texto: msg })));
+        erros.forEach((msg) => alert(`Erro: ${msg}`));
       } else {
-        setMensagens([{ tipo: 'erro', texto: 'Erro inesperado. Tente novamente mais tarde.' }]);
+        alert('Erro inesperado. Tente novamente mais tarde.');
       }
     }
   };
@@ -65,15 +64,6 @@ const CriaContaUsuario = ({ onRegister, onCancel }) => {
         <h1>Cadastrar Usuário</h1>
       </div>
       <div className="register-form-content">
-        {mensagens.length > 0 && (
-          <div className="mensagens">
-            {mensagens.map((mensagem, index) => (
-              <div key={index} className={`mensagem ${mensagem.tipo}`}>
-                {mensagem.texto}
-              </div>
-            ))}
-          </div>
-        )}
         <form onSubmit={handleRegister}>
           <div className="register-form-item">
             <label className="label" htmlFor="nome">Nome:</label>
