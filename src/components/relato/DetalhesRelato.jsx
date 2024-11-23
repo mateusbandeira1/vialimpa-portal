@@ -27,7 +27,7 @@ const DetalhesRelato = ({ id_relato, onBackClick, onEditClick }) => {
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  const idConta = localStorage.getItem('id_conta');
+  const idConta = parseInt(localStorage.getItem('id_conta'), 10);
 
   useEffect(() => {
     const fetchReportDetails = async () => {
@@ -70,7 +70,7 @@ const DetalhesRelato = ({ id_relato, onBackClick, onEditClick }) => {
   const formataData = (date) =>
     date ? new Date(date).toLocaleDateString("pt-BR") : "N/A";
 
-  const canEdit = idConta === report.id_usuario;
+  const canEdit = idConta === parseInt(report.id_usuario, 10);
 
   return (
     <div className="report-details-container">
