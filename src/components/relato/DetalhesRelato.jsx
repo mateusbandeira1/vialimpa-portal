@@ -71,10 +71,9 @@ const DetalhesRelato = ({ id_relato, onBackClick, onEditClick }) => {
   const formataData = (date) =>
     date ? new Date(date).toLocaleDateString("pt-BR") : "N/A";
 
-  // Lógica para verificar se a prefeitura pode editar o relato
   const canEdit =
-    (idConta === parseInt(report.id_usuario, 10)) || // Pode editar se o usuário é o mesmo que o dono do relato
-    (tipoConta === "prefeitura" && idConta === parseInt(report.id_prefeitura, 10)); // Ou se for uma prefeitura da mesma cidade
+    (idConta === parseInt(report.id_usuario, 10)) ||
+    (tipoConta === "prefeitura" && idConta === parseInt(report.id_prefeitura, 10));
 
   return (
     <div className="report-details-container">
