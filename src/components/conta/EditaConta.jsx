@@ -36,6 +36,26 @@ const EditaConta = ({ user, onConfirmEdit, onCancel }) => {
       return;
     }
 
+    if (tipo_conta === "usuario" && (
+      !formData.nome || !formData.cpf || !formData.email ||
+      !formData.telefone || !formData.senha || !formData.rua ||
+      !formData.nr_residencia || !formData.bairro || !formData.cidade || !formData.estado
+    )) {
+      setErrorMessage("Todos os campos obrigatórios devem ser preenchidos.");
+      setLoading(false);
+      return;
+    }
+
+    if (tipo_conta === "prefeitura" && (
+      !formData.responsavel || !formData.cnpj || !formData.email ||
+      !formData.telefone || !formData.senha || !formData.rua ||
+      !formData.nr_residencia || !formData.bairro || !formData.cidade || !formData.estado
+    )) {
+      setErrorMessage("Todos os campos obrigatórios devem ser preenchidos.");
+      setLoading(false);
+      return;
+    }
+
     const apiData = tipo_conta === "usuario"
       ? {
         nome: formData.nome,
@@ -88,7 +108,7 @@ const EditaConta = ({ user, onConfirmEdit, onCancel }) => {
         <h1>Editar Conta</h1>
       </div>
       <div className="edit-account-content">
-        {/* Exibição de mensagens de erro */}
+        { }
         {errorMessage && (
           <div className="error-message">
             {errorMessage}
@@ -214,25 +234,20 @@ const EditaConta = ({ user, onConfirmEdit, onCancel }) => {
         <div className="edit-account-item">
           <label className="label-details">Estado:</label>
           <select
-            className="value"
             name="estado"
             value={formData.estado || ""}
             onChange={handleChange}
             disabled={loading}
           >
-            <option value="">Selecione um estado</option>
+            <option value="">Selecione o estado</option>
             {estadosBrasileiros.map((estado) => (
-              <option key={estado} value={estado}>
-                {estado}
-              </option>
+              <option key={estado} value={estado}>{estado}</option>
             ))}
           </select>
         </div>
         <div className="edit-account-actions">
-          <button onClick={handleConfirm} disabled={loading}>
-            Confirmar
-          </button>
-          <button onClick={onCancel}>Cancelar</button>
+          <button onClick={handleConfirm} disabled={loading}>Confirmar</button>
+          <button onClick={onCancel} disabled={loading}>Cancelar</button>
         </div>
       </div>
     </div>
