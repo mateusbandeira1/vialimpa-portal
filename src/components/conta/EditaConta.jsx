@@ -10,13 +10,11 @@ const estadosBrasileiros = [
 const EditaConta = ({ user, onConfirmEdit, onCancel }) => {
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
 
   const tipo_conta = localStorage.getItem("tipo_conta");
 
   useEffect(() => {
     if (user) {
-      // Apenas define valores se o usuário for válido, evitando valores vazios
       setFormData({
         nome: user.nome || "",
         cpf: user.cpf || "",
@@ -40,11 +38,10 @@ const EditaConta = ({ user, onConfirmEdit, onCancel }) => {
 
   const handleConfirm = async () => {
     setLoading(true);
-    setError(null);
     const id_conta = localStorage.getItem("id_conta");
 
     if (!tipo_conta || !id_conta) {
-      setError("Erro ao obter informações da conta. Tente fazer login novamente.");
+      alert("Erro ao obter informações da conta. Tente fazer login novamente.");
       setLoading(false);
       return;
     }
@@ -83,11 +80,12 @@ const EditaConta = ({ user, onConfirmEdit, onCancel }) => {
       const response = await axios.put(apiUrl, apiData);
 
       onConfirmEdit(response.data);
+      alert("Dados atualizados com sucesso!");
     } catch (err) {
       if (err.response) {
-        setError(err.response.data.message || "Erro ao atualizar os dados.");
+        alert(err.response.data.message || "Erro ao atualizar os dados.");
       } else {
-        setError("Erro ao se comunicar com o servidor.");
+        alert("Erro ao se comunicar com o servidor.");
       }
     } finally {
       setLoading(false);
@@ -234,8 +232,6 @@ const EditaConta = ({ user, onConfirmEdit, onCancel }) => {
             ))}
           </select>
         </div>
-
-        {error && <div className="error-message">{error}</div>}
 
         <div className="edit-account-actions">
           <button onClick={handleConfirm} disabled={loading}>Confirmar</button>

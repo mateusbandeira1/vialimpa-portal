@@ -27,7 +27,7 @@ const DetalhesRelato = ({ id_relato, onBackClick, onEditClick }) => {
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  const tipoConta = localStorage.getItem("tipo_conta");
+  const idConta = localStorage.getItem("id_conta");
 
   useEffect(() => {
     const fetchReportDetails = async () => {
@@ -69,6 +69,8 @@ const DetalhesRelato = ({ id_relato, onBackClick, onEditClick }) => {
 
   const formataData = (date) =>
     date ? new Date(date).toLocaleDateString("pt-BR") : "N/A";
+
+  const canEdit = idConta === report.id_usuario;
 
   return (
     <div className="report-details-container">
@@ -134,14 +136,12 @@ const DetalhesRelato = ({ id_relato, onBackClick, onEditClick }) => {
         </div>
       </div>
       <div className="report-details-actions">
-        {tipoConta === "usuario" && report.status === "aberto" && (
+        { }
+        {canEdit && (
           <>
             <button type="submit" onClick={handleEditClick}>Editar</button>
             <button type="button" onClick={() => setConfirmDelete(true)}>Excluir</button>
           </>
-        )}
-        {tipoConta === "prefeitura" && (
-          <button type="submit" onClick={handleEditClick}>Editar</button>
         )}
         <button type="button" onClick={onBackClick}>Voltar</button>
       </div>
