@@ -16,7 +16,21 @@ const EditaConta = ({ user, onConfirmEdit, onCancel }) => {
 
   useEffect(() => {
     if (user) {
-      setFormData({ ...user });
+      // Apenas define valores se o usuário for válido, evitando valores vazios
+      setFormData({
+        nome: user.nome || "",
+        cpf: user.cpf || "",
+        email: user.email || "",
+        telefone: user.telefone || "",
+        senha: user.senha || "",
+        rua: user.rua || "",
+        nr_residencia: user.nr_residencia || "",
+        bairro: user.bairro || "",
+        cidade: user.cidade || "",
+        estado: user.estado || "",
+        responsavel: user.responsavel || "",
+        cnpj: user.cnpj || ""
+      });
     }
   }, [user]);
 
@@ -63,173 +77,173 @@ const EditaConta = ({ user, onConfirmEdit, onCancel }) => {
 
     try {
       const apiUrl = tipo_conta === "usuario"
-        ? https ://vialimpa-api.vercel.app/usuario/${id_conta}
-        : https://vialimpa-api.vercel.app/prefeitura/${id_conta};
+        ? `https://vialimpa-api.vercel.app/usuario/${id_conta}`
+        : `https://vialimpa-api.vercel.app/prefeitura/${id_conta}`;
 
-const response = await axios.put(apiUrl, apiData);
+      const response = await axios.put(apiUrl, apiData);
 
-onConfirmEdit(response.data);
+      onConfirmEdit(response.data);
     } catch (err) {
-  if (err.response) {
-    setError(err.response.data.message || "Erro ao atualizar os dados.");
-  } else {
-    setError("Erro ao se comunicar com o servidor.");
-  }
-} finally {
-  setLoading(false);
-}
+      if (err.response) {
+        setError(err.response.data.message || "Erro ao atualizar os dados.");
+      } else {
+        setError("Erro ao se comunicar com o servidor.");
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
-return (
-  <div className="edit-account-container">
-    <div className="edit-account-header">
-      <h1>Editar Conta</h1>
-    </div>
-    <div className="edit-account-content">
-      {tipo_conta === "usuario" ? (
-        <>
-          <div className="edit-account-item">
-            <label className="label-details">Nome:</label>
-            <input
-              type="text"
-              name="nome"
-              value={formData.nome || ""}
-              onChange={handleChange}
-              disabled={loading}
-            />
-          </div>
-          <div className="edit-account-item">
-            <label className="label-details">CPF:</label>
-            <input
-              type="text"
-              name="cpf"
-              value={formData.cpf || ""}
-              onChange={handleChange}
-              disabled={loading}
-            />
-          </div>
-        </>
-      ) : (
-        <>
-          <div className="edit-account-item">
-            <label className="label-details">Responsável:</label>
-            <input
-              type="text"
-              name="responsavel"
-              value={formData.responsavel || ""}
-              onChange={handleChange}
-              disabled={loading}
-            />
-          </div>
-          <div className="edit-account-item">
-            <label className="label-details">CNPJ:</label>
-            <input
-              type="text"
-              name="cnpj"
-              value={formData.cnpj || ""}
-              onChange={handleChange}
-              disabled={loading}
-            />
-          </div>
-        </>
-      )}
-      <div className="edit-account-item">
-        <label className="label-details">Email:</label>
-        <input
-          type="email"
-          name="email"
-          value={formData.email || ""}
-          onChange={handleChange}
-          disabled={loading}
-        />
+  return (
+    <div className="edit-account-container">
+      <div className="edit-account-header">
+        <h1>Editar Conta</h1>
       </div>
-      <div className="edit-account-item">
-        <label className="label-details">Telefone:</label>
-        <input
-          type="text"
-          name="telefone"
-          value={formData.telefone || ""}
-          onChange={handleChange}
-          disabled={loading}
-        />
-      </div>
-      <div className="edit-account-item">
-        <label className="label-details">Senha:</label>
-        <input
-          type="password"
-          name="senha"
-          value={formData.senha || ""}
-          onChange={handleChange}
-          disabled={loading}
-        />
-      </div>
-      <div className="edit-account-item">
-        <label className="label-details">Rua:</label>
-        <input
-          type="text"
-          name="rua"
-          value={formData.rua || ""}
-          onChange={handleChange}
-          disabled={loading}
-        />
-      </div>
-      <div className="edit-account-item">
-        <label className="label-details">Número da Residência:</label>
-        <input
-          type="text"
-          name="nr_residencia"
-          value={formData.nr_residencia || ""}
-          onChange={handleChange}
-          disabled={loading}
-        />
-      </div>
-      <div className="edit-account-item">
-        <label className="label-details">Bairro:</label>
-        <input
-          type="text"
-          name="bairro"
-          value={formData.bairro || ""}
-          onChange={handleChange}
-          disabled={loading}
-        />
-      </div>
-      <div className="edit-account-item">
-        <label className="label-details">Cidade:</label>
-        <input
-          type="text"
-          name="cidade"
-          value={formData.cidade || ""}
-          onChange={handleChange}
-          disabled={loading}
-        />
-      </div>
-      <div className="edit-account-item">
-        <label className="label-details">Estado:</label>
-        <select
-          className="value"
-          name="estado"
-          value={formData.estado || ""}
-          onChange={handleChange}
-          disabled={loading}
-        >
-          <option value="">Selecione um estado</option>
-          {estadosBrasileiros.map((estado) => (
-            <option key={estado} value={estado}>
-              {estado}
-            </option>
-          ))}
-        </select>
-      </div>
+      <div className="edit-account-content">
+        {tipo_conta === "usuario" ? (
+          <>
+            <div className="edit-account-item">
+              <label className="label-details">Nome:</label>
+              <input
+                type="text"
+                name="nome"
+                value={formData.nome || ""}
+                onChange={handleChange}
+                disabled={loading}
+              />
+            </div>
+            <div className="edit-account-item">
+              <label className="label-details">CPF:</label>
+              <input
+                type="text"
+                name="cpf"
+                value={formData.cpf || ""}
+                onChange={handleChange}
+                disabled={loading}
+              />
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="edit-account-item">
+              <label className="label-details">Responsável:</label>
+              <input
+                type="text"
+                name="responsavel"
+                value={formData.responsavel || ""}
+                onChange={handleChange}
+                disabled={loading}
+              />
+            </div>
+            <div className="edit-account-item">
+              <label className="label-details">CNPJ:</label>
+              <input
+                type="text"
+                name="cnpj"
+                value={formData.cnpj || ""}
+                onChange={handleChange}
+                disabled={loading}
+              />
+            </div>
+          </>
+        )}
+        <div className="edit-account-item">
+          <label className="label-details">Email:</label>
+          <input
+            type="email"
+            name="email"
+            value={formData.email || ""}
+            onChange={handleChange}
+            disabled={loading}
+          />
+        </div>
+        <div className="edit-account-item">
+          <label className="label-details">Telefone:</label>
+          <input
+            type="text"
+            name="telefone"
+            value={formData.telefone || ""}
+            onChange={handleChange}
+            disabled={loading}
+          />
+        </div>
+        <div className="edit-account-item">
+          <label className="label-details">Senha:</label>
+          <input
+            type="password"
+            name="senha"
+            value={formData.senha || ""}
+            onChange={handleChange}
+            disabled={loading}
+          />
+        </div>
+        <div className="edit-account-item">
+          <label className="label-details">Rua:</label>
+          <input
+            type="text"
+            name="rua"
+            value={formData.rua || ""}
+            onChange={handleChange}
+            disabled={loading}
+          />
+        </div>
+        <div className="edit-account-item">
+          <label className="label-details">Número da Residência:</label>
+          <input
+            type="text"
+            name="nr_residencia"
+            value={formData.nr_residencia || ""}
+            onChange={handleChange}
+            disabled={loading}
+          />
+        </div>
+        <div className="edit-account-item">
+          <label className="label-details">Bairro:</label>
+          <input
+            type="text"
+            name="bairro"
+            value={formData.bairro || ""}
+            onChange={handleChange}
+            disabled={loading}
+          />
+        </div>
+        <div className="edit-account-item">
+          <label className="label-details">Cidade:</label>
+          <input
+            type="text"
+            name="cidade"
+            value={formData.cidade || ""}
+            onChange={handleChange}
+            disabled={loading}
+          />
+        </div>
+        <div className="edit-account-item">
+          <label className="label-details">Estado:</label>
+          <select
+            className="value"
+            name="estado"
+            value={formData.estado || ""}
+            onChange={handleChange}
+            disabled={loading}
+          >
+            <option value="">Selecione um estado</option>
+            {estadosBrasileiros.map((estado) => (
+              <option key={estado} value={estado}>
+                {estado}
+              </option>
+            ))}
+          </select>
+        </div>
 
-      {error && <div className="error-message">{error}</div>}
+        {error && <div className="error-message">{error}</div>}
 
-      <div className="edit-account-actions">
-        <button onClick={handleConfirm}>Confirmar</button>
-        <button onClick={onCancel}>Cancelar</button>
+        <div className="edit-account-actions">
+          <button onClick={handleConfirm} disabled={loading}>Confirmar</button>
+          <button onClick={onCancel} disabled={loading}>Cancelar</button>
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
 };
 
 export default EditaConta;
