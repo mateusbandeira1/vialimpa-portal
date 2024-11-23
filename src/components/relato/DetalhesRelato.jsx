@@ -28,6 +28,7 @@ const DetalhesRelato = ({ id_relato, onBackClick, onEditClick }) => {
   const [loading, setLoading] = useState(true);
 
   const idConta = parseInt(localStorage.getItem('id_conta'), 10);
+  const tipoConta = localStorage.getItem('tipo_conta');
 
   useEffect(() => {
     const fetchReportDetails = async () => {
@@ -70,7 +71,10 @@ const DetalhesRelato = ({ id_relato, onBackClick, onEditClick }) => {
   const formataData = (date) =>
     date ? new Date(date).toLocaleDateString("pt-BR") : "N/A";
 
-  const canEdit = idConta === parseInt(report.id_usuario, 10);
+  // Lógica para verificar se a prefeitura pode editar o relato
+  const canEdit =
+    (idConta === parseInt(report.id_usuario, 10)) || // Pode editar se o usuário é o mesmo que o dono do relato
+    (tipoConta === "prefeitura" && idConta === parseInt(report.id_prefeitura, 10)); // Ou se for uma prefeitura da mesma cidade
 
   return (
     <div className="report-details-container">
@@ -136,7 +140,6 @@ const DetalhesRelato = ({ id_relato, onBackClick, onEditClick }) => {
         </div>
       </div>
       <div className="report-details-actions">
-        { }
         {canEdit && (
           <>
             <button type="submit" onClick={handleEditClick}>Editar</button>
