@@ -13,10 +13,9 @@ const ModalAtualizarSenha = ({ token, onConfirm, onCancel }) => {
                 token: inputToken,
                 novaSenha,
             });
-            alert(response.data.message); // Exibe a mensagem de sucesso no alert
-            onConfirm();
+            alert(response.data.message);
         } catch (err) {
-            alert(err.response?.data?.message || "Erro ao atualizar a senha."); // Exibe erros no alert
+            alert(err.response?.data?.message || "Erro ao atualizar a senha.");
         }
     };
 
@@ -65,11 +64,11 @@ const RedefinirSenha = () => {
             const response = await axios.post("https://vialimpa-api.vercel.app/redefinir-senha", {
                 email,
             });
-            alert(response.data.message); // Exibe a mensagem de sucesso no alert
+            alert(response.data.message);
             setToken(response.data.token);
             setIsModalOpen(true);
         } catch (err) {
-            alert(err.response?.data?.message || "Erro ao redefinir a senha."); // Exibe erros no alert
+            alert(err.response?.data?.message || "Erro ao redefinir a senha.");
         }
     };
 

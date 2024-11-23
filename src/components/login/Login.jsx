@@ -21,11 +21,11 @@ const Login = ({ onLogin, onRegister, onForgotPassword }) => {
       onLogin();
     } catch (err) {
       if (err.response) {
-        alert(err.response.data.message || 'Erro ao fazer login'); // Mensagem de erro retornada pela API
+        alert(err.response.data.message || 'Erro ao fazer login');
       } else if (err.request) {
-        alert('Erro na conexão com o servidor'); // Caso de erro de conexão
+        alert('Erro na conexão com o servidor');
       } else {
-        alert('Erro desconhecido'); // Erro genérico
+        alert('Erro desconhecido');
       }
     }
   };

@@ -26,7 +26,7 @@ const EditaConta = ({ user, onConfirmEdit, onCancel }) => {
 
   const handleConfirm = async () => {
     setLoading(true);
-    setErrorMessage(""); // Limpa mensagens de erro antes de iniciar a requisição
+    setErrorMessage("");
 
     const id_conta = localStorage.getItem("id_conta");
 

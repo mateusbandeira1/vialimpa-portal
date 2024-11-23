@@ -35,16 +35,14 @@ const ReportForm = () => {
       const response = await axios.post('https://vialimpa-api.vercel.app/relato', reportData);
 
       if (response.data.message) {
-        alert(response.data.message);  // Exibe a mensagem da API em um alert
-      } else {
-        alert('Relatório enviado com sucesso!');  // Exibe mensagem de sucesso
+        alert(response.data.message);
       }
       handleCancel();
     } catch (error) {
       if (error.response?.data?.message) {
-        alert(error.response.data.message);  // Exibe a mensagem de erro da API em um alert
+        alert(error.response.data.message);
       } else {
-        alert('Erro ao enviar o relatório. Tente novamente.');  // Exibe erro genérico
+        alert('Erro ao enviar o relatório. Tente novamente.');
       }
     }
   };
