@@ -70,7 +70,7 @@ const DetalhesRelato = ({ id_relato, onBackClick, onEditClick }) => {
   const formataData = (date) =>
     date ? new Date(date).toLocaleDateString("pt-BR") : "N/A";
 
-  const canEdit = idConta === report.id_usuario;
+  const canEdit = 2 === report.id_usuario;
 
   return (
     <div className="report-details-container">
